@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="vending">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="favicon.ico"> -->
+
+    <title>Vending Machine</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="vending-machine.css" rel="stylesheet">
+    <!-- Polymer -->
+    <link rel="import" href="http://www.polymer-project.org/components/paper-ripple/paper-ripple.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-icons/core-icons.html">
+    <link rel="import" href="http://www.polymer-project.org/components/font-roboto/roboto.html">
+
+    <!-- Angular JS -->
+    <script src="js/angular.min.js"></script>
+
+    <script src="controllers/vending_machine.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="page-header">
+        <h1 align="center">
+          <object width="70px" height="70px" type="image/svg+xml" data="https://arktos.io/img/logo-thumb-white.svg"></object>
+          <p> Vending Machine </p>
+        </h1>
+      </div>
+    </div>
+
+    <div ng-controller="VendingMachine">
+      <section align="center">
+            <div class="card" style="background: url(images/vending_machine/{{snack.img}}) no-repeat; background-size:contain;" ng-repeat="snack in snacks">
+              <paper-ripple class="recenteringTouch" fit></paper-ripple>
+              <h4 style="padding-top: 100px; color:white;"> 
+                {{snack.quantity}} 
+              </h4>
+            </div>
+      </section>
+
+      <section align="center" style="padding-top: 15px">
+        <div class="button raised" ng-click="snackMeInit()" id="div2">
+          <div class="center" style="color: black" fit>Snack Me!</div>
+          <paper-ripple fit></paper-ripple>
+        </div>
+      </section>
+
+      <section align="center" ng-hide="selects.img == null" class="containerSelected">
+        <div class="selectedCard">
+          <img src='images/vending_machine/{{selects.img}}' style="max-width: 250px; max-height: 250px">
+          <paper-ripple class="recenteringTouch" fit></paper-ripple>
+        </div>
+        <div class="dialog">
+          <h1 style="color:black;"> {{selects.name}} </h1>
+          <p style="color:black;"> quantity left: {{selects.quantity}} </p>
+          <div ng-hide="selects.quantity == 0" class="buttongreen raised" ng-click="snackAccepted()">
+            <div class="center" fit>I'll take it!</div>
+            <paper-ripple fit></paper-ripple>
+          </div>     
+          <div ng-show="selects.quantity == 0" class="buttonblue raised" ng-click="snackMeInit()">
+            <div class="center" fit>No more left! Try again?</div>
+            <paper-ripple fit></paper-ripple>
+          </div>           
+        </div>
+      </section>
+
+      <section align="center" ng-hide="lastItemSelected.img == null" class="containerSelected">
+        <div class="selectedCard">
+          <img src='images/vending_machine/{{lastItemSelected.img}}' style="max-width: 250px; max-height: 250px">
+          <paper-ripple class="recenteringTouch" fit></paper-ripple>
+        </div>
+          <div class="dialog">
+            <br>
+            <br>
+            <h3 style="color:black;"> {{lastItemSelected.name}} has been dispenced!</h3>
+            <h2 style="color:black;"> Have a great day! </h2>
+          </div>
+      </section>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted" align="center">@KirthiBanothu</p>
+      </div>
+    </footer>
+  </body>
+
+
+</html>
